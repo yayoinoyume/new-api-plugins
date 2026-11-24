@@ -10,15 +10,17 @@ Answers typed questions about text, data or images with TypeSafe System One and 
 
 - Choose the Task Plugin (61) channel type and bind the TypeSafe plugin.
 - The key is a TypeSafe API key. See the [TypeSafe API docs](https://docs.typesafe.ai/api).
-- Leave the API address empty to use `https://api.typesafe.ai`. An address ending in `/v1` also works.
+- Leave the API address empty to use `https://api.typesafe.ai`. System One requests also work with an address ending in `/v1`; enter the address without that suffix to fetch the model list.
 - To use another New API gateway as the upstream, choose New API (60) and enter that gateway's address and one of its tokens. That gateway needs the TypeSafe plugin too.
 
 ## Models and endpoints
 
 | Endpoint | What it does | Models |
 | --- | --- | --- |
-| `POST /v1/systemone` | Sends a System One request and returns TypeSafe's answers. | `jev-1.14.0`, `jev-1.13.0`, `jev-latest`, `jev-preview` |
+| `POST /v1/systemone` | Sends a System One request and returns TypeSafe's answers. | Any Jev model |
 | `POST /typesafe/v1/systemone` | Same as above, under the plugin's own prefix. | Same as above |
+
+The plugin lists `jev-1.14.0`, `jev-1.13.0`, `jev-latest` and `jev-preview` by default. Use "Fetch models" in the channel form to load the current list from TypeSafe (`GET /v1/models`). A request may name any Jev model, including one TypeSafe added or a channel model alias.
 
 The official TypeSafe SDKs work with the gateway root as their base URL.
 Questions use the types `choice`, `score`, `noul` and `box`.

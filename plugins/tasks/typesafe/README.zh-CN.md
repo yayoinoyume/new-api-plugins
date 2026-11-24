@@ -9,15 +9,17 @@ locale: zh-CN
 
 - 渠道类型选任务插件 (61)，并绑定 TypeSafe 插件。
 - 密钥填 TypeSafe 的 API Key，详见 [TypeSafe API 文档](https://docs.typesafe.ai/api)。
-- API 地址留空时使用 `https://api.typesafe.ai`。地址末尾带 `/v1` 也可以。
+- API 地址留空时使用 `https://api.typesafe.ai`。System One 请求兼容末尾带 `/v1` 的地址；要获取模型列表，地址末尾不要带 `/v1`。
 - 如果上游是另一台 New API 网关，渠道类型选 New API (60)，填写该网关的地址和它的令牌。上游网关也需要安装 TypeSafe 插件。
 
 ## 模型与接口
 
 | 接口 | 用途 | 模型 |
 | --- | --- | --- |
-| `POST /v1/systemone` | 发送 System One 请求，返回 TypeSafe 的答案。 | `jev-1.14.0`、`jev-1.13.0`、`jev-latest`、`jev-preview` |
+| `POST /v1/systemone` | 发送 System One 请求，返回 TypeSafe 的答案。 | 任意 Jev 模型 |
 | `POST /typesafe/v1/systemone` | 同上，使用插件自己的路径前缀。 | 同上 |
+
+插件默认列出 `jev-1.14.0`、`jev-1.13.0`、`jev-latest` 和 `jev-preview`。渠道配置里可以用“获取模型列表”从 TypeSafe 读取当前列表（`GET /v1/models`）。请求可以使用任意 Jev 模型，包括 TypeSafe 新增的模型或渠道配置的模型别名。
 
 TypeSafe 官方 SDK 把网关根地址设为 base URL 即可使用。
 问题类型有 `choice`、`score`、`noul` 和 `box`。
